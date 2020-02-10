@@ -26,7 +26,7 @@ class Test(unittest.TestCase):
         self.word = "thhtthht"
         count = count_th(self.word)
         self.assertEqual(2, count)
-
+ 
     def test_count_th_mixedcase(self):
         self.word = "THtHThth"
         count = count_th(self.word)
