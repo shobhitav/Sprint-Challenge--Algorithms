@@ -97,32 +97,73 @@ class SortingRobot:
         """
         return self._light == "ON"
 
+    # def sort(self):
+        
+        # # reset the light to OFF and held item to None while starting from index 0
+        # self.reset()
+        # while self.can_move_right():
+        #     self.move_right()
+        #     self.swap_item()
+        #     self.move_left()
+            
+        #     # if held item (which is next element's value) is lesser ...
+        #     if self.compare_item() == -1 :
+        #         self.swap_item()
+        #         self.move_right()
+        #         self.swap_item()
+        #         self.set_light_on()
+        #     else:
+        #         self.move_right()
+        #         self.swap_item()
+        # #  if the light is still off at the end of traversal, then we know the list was sorted
+        # if self.light_is_on():
+        #     self.sort()
+    
+    #  without using reset()
     def sort(self):
+
         """
         Sort the robot's list.
-        """
-        # reset the light to OFF and held item to None while starting from index 0
-        self.reset()
-        while self.can_move_right():
-            self.move_right()
-            self.swap_item()
-            self.move_left()
-            
-            # if held item (which is next element's value) is lesser ...
-            if self.compare_item() == -1 :
-                self.swap_item()
-                self.move_right()
-                self.swap_item()
-                self.set_light_on()
-            else:
-                self.move_right()
-                self.swap_item()
-        #  if the light is still off at the end of traversal, then we know the list was sorted
-        if self.light_is_on():
-            self.sort()
-            
+        """     
+        #if light switch comes on, go reiterate through the list
+        self.set_light_on()
 
- 
+        #helper function that switches the switch
+        while self.light_is_on() == True:
+            self.set_light_off()
+            #check if our right hand is empty
+            while self.can_move_right():
+                #swap item
+                self.swap_item()
+                #move on
+                self.move_right()
+                #case we do have an item
+                if self.compare_item() == 1:
+                    #swap smallest
+                    self.swap_item()
+                    #flip the switch since we've swapped
+                    self.set_light_on()
+                    #we must adjust after swapping 
+                self.move_left()
+                self.swap_item()
+
+                #move on to the next hand
+                self.move_right()
+
+            
+            while self.can_move_left():
+                self.swap_item()
+                self.move_left()
+
+                if self.compare_item() == -1:
+                    self.swap_item()
+                    self.set_light_on()
+
+                self.move_right()
+                self.swap_item()
+                self.move_left()    
+
+         
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
