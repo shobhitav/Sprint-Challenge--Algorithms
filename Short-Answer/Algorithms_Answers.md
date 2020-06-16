@@ -2,15 +2,45 @@
 
 ## Exercise I
 
-a) O(n)
 
-b) O(log n)
 
-c) O(n)
+a)  a = 0
+    while (a < n * n * n):
+      a = a + n * n
+
+ O(n) , linear for large n
+
+b)
+sum = 0
+    for i in range(n):
+      j = 1
+      while j < n:
+        j *= 2
+        sum += 1
+
+n=4 no of operations= 2
+n=8 no of operations=3
+n=16 no of operations=4
+n=32 no of operations=5
+
+Logarithmic  O(log n)
+
+c) def bunnyEars(bunnies):
+      if bunnies == 0:
+        return 0
+
+      return 2 + bunnyEars(bunnies-1)
+
+n=1  no of operations=1
+n=2  no of operations=2
+n=3  no of operations=3
+Runtime Complexity : Linear O(n)
+
    Space complexity : O(n)
 
 
 ## Exercise II
+The best approach is to use binary search for this algorithm .
 Start with floor n/2
 Then drop an egg from given floor(n/2)
   - If the egg breaks:

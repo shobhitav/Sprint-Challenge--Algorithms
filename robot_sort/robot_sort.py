@@ -8,6 +8,11 @@ class SortingRobot:
         self._position = 0      # The list position the robot is at
         self._light = "OFF"     # The state of the robot's light
         self._time = 0          # A time counter (stretch)
+    
+    def reset(self):
+        self._item = None
+        self._position = 0
+        self._light = "OFF"
 
     def can_move_right(self):
         """
@@ -30,7 +35,7 @@ class SortingRobot:
         This will increment the time counter by 1.
         """
         self._time += 1
-        if self._position < len(self._list) - 1:
+        if self.can_move_right():
             self._position += 1
             return True
         else:
@@ -43,7 +48,7 @@ class SortingRobot:
         This will increment the time counter by 1.
         """
         self._time += 1
-        if self._position > 0:
+        if self.can_move_left():
             self._position -= 1
             return True
         else:
@@ -96,9 +101,28 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        # reset the light to OFF and held item to None while starting from index 0
+        self.reset()
+        while self.can_move_right():
+            self.move_right()
+            self.swap_item()
+            self.move_left()
+            
+            # if held item (which is next element's value) is lesser ...
+            if self.compare_item() == -1 :
+                self.swap_item()
+                self.move_right()
+                self.swap_item()
+                self.set_light_on()
+            else:
+                self.move_right()
+                self.swap_item()
+        #  if the light is still off at the end of traversal, then we know the list was sorted
+        if self.light_is_on():
+            self.sort()
+            
 
+ 
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
